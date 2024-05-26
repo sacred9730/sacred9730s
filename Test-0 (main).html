@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="KO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $(document).ready(function(){
+        /* #만 기본동작 금지*/
+        $("a").click(function(e){
+        var href = $(this).attr("href");
+        if (href === '#'){
+        e.preventDefault(); };
+        });
+
+        /* .im 호버할경우 icons 화려하게등장 */
+        $(".im").hover(ic1,ic2);
+        function ic1(){
+            $(this).find(".icon").stop().fadeIn(300);
+            $(this).find(".icon-var").stop().fadeIn(300);
+            $(this).find("a > img").stop().css("border-radius","0");
+        };
+        function ic2(){
+            $(this).find(".icon").stop().fadeOut(300);
+            $(this).find(".icon-var").stop().fadeOut(300);
+            $(this).find("a > img").stop().css("border-radius","12px");
+        };
+
+        /* button-c 링크 해제 */
+        $(".im-c > .button-c").click(function(e){
+            e.preventDefault();
+        });
+        
+        
+
+
+    });
+
+    
+</script>
+
+<style>
+
+@charset "UTF-8";
+* {margin: 0; padding: 0;}
+a, img {display: block; width: 100%; height: 100%;}
+.unset {display: inline-block; width: unset; height: unset;}
+li {list-style: none;}
+a, p {text-decoration: none;}
+
+div, header, main, a, ul, strong, p, span  {border: 1px solid #000; box-sizing: border-box;}
+
+/*워랩*/
+#wrap {width: 100%;  display: flex; flex-wrap: wrap;}
+
+/*헤더*/
+#header {width: 100%; height: 60px;}
+.hd-f {width: 100%; height: 60px; display: flex; position: fixed;  z-index: 10; background-color: green;}
+.hd1 {width: 200px; }
+.hd2 {width: calc(100% - 200px);}
+.hd3 {width: 200px; }
+
+
+/*컨텐츠시작*/
+#main {width: 100%; height: 100vh; display: flex; }
+
+
+
+
+
+/*배너*/
+#ban {width: 75px; }
+.ban-f {width: 75px; height: 100%; position: fixed; background-color: red;}
+
+
+
+/*링크,동영상 시작*/
+#wc {width: calc(100% - 75px); height: max-content; background-color: yellow; }
+
+
+/*알고리즘*/
+#link {height: 60px;}
+.link-f {width: 100%; height: 60px; position: fixed; z-index: 10; background-color: skyblue; }
+
+/*동영상 썸네일*/
+#images {min-height: calc(100vh - 60px); height: max-content; z-index: 1;}
+.img {width: 100%; height: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
+padding: 16px;}
+.im {aspect-ratio: 1.7 / 1 ;}
+.im img {border-radius: 12px; transition: all 0.2s;}
+
+.im > a {position: relative;}
+.im > .icons {position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; }
+
+/*동영상 icons-bg*/
+.im .icons .icon {padding: 2px; background-color: rgba(0,0,0,0.7); color: #fff; border-radius: 3px; margin: 5px;
+  font-size: 12px; font-weight: bold; }
+.i-v { position: absolute; top: 0; right: 0; opacity: 1;}
+.i-c { position: absolute; top: 40px; right: 0; opacity: 0.7;}
+.i-t { position: absolute; bottom: 5px; right: 0;}
+.icon-var {position: absolute; bottom: 0; width: 100%; height: 5px; background-color: rgba(255,255,255,0.7);  }
+.icon-var::after {content: ''; display: block; width: 0; height: 100%; background-color: red; animation:  progress linear infinite; }
+.icon-var::after {animation-duration: calc(var(--var-time) * 1.05s);}
+@keyframes progress {0% {width: 0%;} 100% {width: 100%}; }
+
+.icon {display: none; }
+.icon-var {display: none;}
+
+
+
+
+/*동영상 카드*/
+.im .im-title {}
+.im > .im-title > a { display: grid; grid-template-columns: 2fr 9fr 1fr;  }
+.im-a {display: flex; justify-content: center; align-items: start; }
+.im-a img {width: 36px; height: 36px; border-radius: 50%;  padding: 5px;}
+.im-b {display: grid; grid-template-rows: 2fr 1fr 1fr; color: rgb(170, 170, 170);}
+.im-b strong {padding: 5px; line-height: 1.5; color: #000;
+
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
+    }
+.im-b p {
+
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; 
+}
+
+.im-b span {
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; 
+}
+.im-c {position: relative;}
+.button-c {display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; z-index: 50; color: #333;
+    font-size: 15px; font-weight: bold; border: none;  background-color: transparent; position: absolute; top: 5px; left: -5px;
+transform: rotate(90deg); letter-spacing: -8px;  border-radius: 50%;}
+.button-c:hover {}
+
+</style>
+</head>
+<body>
+<div id="wrap">
+    
+    <header id="header"> <!--헤더-->
+        <div class="hd-f">
+            <div class="hd1"></div>
+            <div class="hd2"></div>
+            <div class="hd3"></div>
+        </div>
+    </header>
+
+    <main id="main"> <!--컨텐츠 시작-->
+
+        <div id="ban">
+            <div class="ban-f"></div>
+        </div>
+
+    <div id="wc"> <!--링크,동영상 시작-->
+
+        <div id="link">
+            <div class="link-f"></div>
+        </div>
+
+        <div id="images">
+            <div class="img">
+
+                <div class="im"><a href="#"> <!--동영상 start-->
+                    <img src="https://i1.sndcdn.com/artworks-y73A5yNdhPLEzIDv-G8Tidg-t500x500.jpg" alt="vd">
+                        <div class="icons">
+                            <div class="icon i-v">음소거</div>
+                            <div class="icon i-c">자막</div>
+                            <div class="icon i-t"></div>
+                            <div class="icon-var"></div>
+                        </div>
+                    </a>
+                    <div class="im-title"><a href="#"> <!--동영상 카드-->
+                        <div class="im-a">
+                            <img src="https://i1.sndcdn.com/artworks-y73A5yNdhPLEzIDv-G8Tidg-t500x500.jpg" alt="im-a-img">
+                        </div>
+                        <div class="im-b">
+                            <strong>API server not find. </strong>
+                            <p>####</p>
+                            <span>조회수 ##회 &middot; YY-MM-DD일 전</span>
+                        </div>
+                        <div class="im-c">
+                            <div class="button-c">&#12539;&#12539;&#12539;</div>
+                        </div>
+                    </a></div> 
+                </div>  <!--동영상 End-->
+                <div class="im"><a href="#"> <!--동영상 start-->
+                    <img src="https://i1.sndcdn.com/artworks-y73A5yNdhPLEzIDv-G8Tidg-t500x500.jpg" alt="vd">
+                        <div class="icons">
+                            <div class="icon i-v">음소거</div>
+                            <div class="icon i-c">자막</div>
+                            <div class="icon i-t"></div>
+                            <div class="icon-var"></div>
+                        </div>
+                    </a>
+                    <div class="im-title"><a href="#"> <!--동영상 카드-->
+                        <div class="im-a">
+                            <img src="https://i1.sndcdn.com/artworks-y73A5yNdhPLEzIDv-G8Tidg-t500x500.jpg" alt="im-a-img">
+                        </div>
+                        <div class="im-b">
+                            <strong>API server not find. 서버를 찾을수 없습니다.</strong>
+                            <p>####</p>
+                            <span>조회수 ##회 &middot; YY-MM-DD일 전</span>
+                        </div>
+                        <div class="im-c">
+                        </div>
+                    </a></div> 
+                </div>  <!--동영상 End-->
+                
+
+               
+
+            </div> <!--img End-->
+        </div> <!--images End-->
+    </main>
+</div>
+<script>
+    /* 동영상 가상 API start */
+    function v_0(){ // im 선택자 //
+        /* 가상 영상 정보들*/
+        var videoinfo = {
+            strong: "안녕하세요 이것은 가상 스크립트 내장된 API 입니다 현재는 API v_0",
+            p: "채널명 v_0",
+            a: "https://i1.sndcdn.com/artworks-y73A5yNdhPLEzIDv-G8Tidg-t500x500.jpg",
+            view: 100000,
+            upload: "2023-12-31T12:00:00Z",
+            link : "https://youtu.be/DpTe4ai10ek?list=RDMMDpTe4ai10ek",
+            t: 20,
+        };
+        
+        /*날짜 출력 포맷 변경*/
+        var fvc = vc(videoinfo.view);
+        var js_span = "조회수: " + fvc + " &middot; 업로드: " + calcday(videoinfo.upload) + "일 전";
+
+        /*html로 출력시키기*/
+        var js_im = document.querySelectorAll(".im")[0]; // im 선택자 //
+    js_im.querySelector(".im-b > strong").textContent = videoinfo.strong;
+
+    js_im.querySelector(".im-b > p").textContent = videoinfo.p;
+    js_im.querySelector(".im-b > span").innerHTML = js_span;
+    js_im.querySelector(".im-a > img").src = videoinfo.a;
+    js_im.querySelector("a").href = videoinfo.link;
+    js_im.querySelector("a").target = "_blank";
+    js_im.querySelector(".im-title > a").href = videoinfo.link;
+    js_im.querySelector(".im-title > a").target = "_blank";
+
+
+            /* css var-time 동기화*/
+            js_im.style.setProperty('--var-time',videoinfo.t);
+        
+
+            /*.im 호버할경우 재생시간 흘러가도록 만듬*/
+        var js_i_t = js_im.querySelector('.icon.i-t');
+        var timeleft = videoinfo.t;
+        var timeinterval;
+            js_im.addEventListener('mouseover', function(){
+                timeinterval = setInterval(function(){
+                var hours = Math.floor(timeleft / 3600);
+                var minutes = Math.floor((timeleft % 3600) / 60);
+                var seconds = timeleft % 60;
+                var displaytime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                js_i_t.textContent = displaytime;
+
+                    /*점점 시간을뺴며 0미만일경우 원래시간으로 복귀*/
+                    timeleft--;
+                    if(timeleft < 0){
+                    timeleft = videoinfo.t;
+                    };
+                    
+                },1000);
+                
+            });
+
+            /* .im 호버해제할 경우 재생시간 초기화 */
+            js_im.addEventListener('mouseout',function(){
+                clearInterval(timeinterval);
+                timeleft = videoinfo.t;
+                var hours = Math.floor(timeleft / 3600);
+                var minutes = Math.floor((timeleft % 3600) / 60);
+                var seconds = timeleft % 60;
+                var displaytime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                js_i_t.textContent = displaytime;
+            });
+
+
+    }; /* 가상 API End*/
+
+
+
+
+
+    /* 조회수 만회, 천회 단위로 끊어지게*/
+    function vc(count){
+        if (count >= 10000){
+            var result = (count / 10000).toFixed(1);
+            return result.endsWith('.0') ? result.slice(0, -2) + '만회' : result + '만회';
+        } else if (count >= 1000) {
+            var result = (count / 1000).toFixed(1);
+            return result.endsWith('.0') ? result.slice(0, -2) + '천회' : result + '천회';
+        } else {
+            return count.toLocaleString() + "회";
+        }
+    }
+
+
+    /* 날짜계산 함수 */
+    function calcday(infodate){
+        var uploaddate = new Date(infodate);
+        var nowdate = new Date();
+        var daysAgo = Math.floor((nowdate - uploaddate) / (1000 * 60 * 60 * 24));
+        return daysAgo;
+    };
+    
+
+    /* API 출력 함수 */
+    window.onload = function(){
+        v_0();
+        v_1();
+        v_2();
+        v_3();
+        
+    };
+</script>
+</body>
+</html>
