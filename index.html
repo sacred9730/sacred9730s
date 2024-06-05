@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>음성 인식 예제</title>
+</head>
+<body>
+
+<h1>음성 인식 예제</h1>
+
+<div id="result"></div>
+<button id="startButton">음성 인식 시작</button>
+<button id="stopButton">음성 인식 종료</button>
+
+<script>
+// 음성 인식 객체 생성
+let recognition = new webkitSpeechRecognition();
+recognition.lang = 'ko-KR'; // 인식할 언어 설정 (한국어)
+
+// 결과를 표시할 요소 선택
+let resultDiv = document.getElementById('result');
+
+// 음성 인식 시작 버튼 이벤트 리스너
+document.getElementById('startButton').addEventListener('click', function() {
+    recognition.start();
+    resultDiv.textContent = '음성 인식 중...';
+});
+
+// 음성 인식 종료 버튼 이벤트 리스너
+document.getElementById('stopButton').addEventListener('click', function() {
+    recognition.stop();
+});
+
+// 음성 인식 결과 이벤트 리스너
+recognition.addEventListener('result', function(event) {
+    let transcript = event.results[0][0].transcript;
+    resultDiv.textContent = transcript;
+});
+
+// 음성 인식 에러 처리
+recognition.addEventListener('error', function(event) {
+    console.error('음성 인식 에러:', event.error);
+    resultDiv.textContent = '음성 인식 에러 발생';
+});
+</script>
+
+</body>
+</html>
